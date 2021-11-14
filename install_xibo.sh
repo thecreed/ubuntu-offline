@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # extract the tarball 
-[ ! -d ubuntu-offline ] && tar xvfz xibo-ubuntu-offline.tar.gz
+[ ! -d ubuntu-offline ] && tar xfz xibo-ubuntu-offline.tar.gz
 
 cd ubuntu-offline
 
@@ -16,8 +16,10 @@ fi
 
 
 # import the container images
-if [ `docker images | wc -l` -le 2 ] ; then
-docker load -i images/container_images.tar
+if [ `docker images | wc -l` -le 2 ] ; then 
+echo "Loading images to docker"
+docker load -i images/container_images.tar 1>/dev/null || echo "Error loading images to docker"
+
 # restore the container tags
 while read REPOSITORY TAG IMAGE_ID
 do
