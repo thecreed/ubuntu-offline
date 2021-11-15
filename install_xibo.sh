@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# make sure apache and mysql is not installed
+apt-get remove apache2 mysql-server -y
+
 # extract the tarball 
 [ ! -d ubuntu-offline ] && tar xfz xibo-ubuntu-offline.tar.gz
 
@@ -10,7 +13,7 @@ docker version 1>/dev/null 2>/dev/null || sh ./docker_offline_install.sh
 
 # install the docker-compose binary
 if [ ! -x /usr/local/bin/docker-compose ] ; then
-cp bin/docker-compose /usr/local/bin/docker_compose
+cp bin/docker-compose /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 fi
 
